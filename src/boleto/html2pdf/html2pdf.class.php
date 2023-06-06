@@ -367,7 +367,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
             // the name must be a PDF name
             if (strtolower(substr($name, -4))!='.pdf') {
-                throw new HTML2PDF_exception(0, 'The output document name "'.$name.'" is not a PDF name');
+                throw new HTML2PDF_\Exception(0, 'The output document name "'.$name.'" is not a PDF name');
             }
 
             // call the output of TCPDF
@@ -1248,7 +1248,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
             // the action must exist
             if (!is_callable(array(&$this, $fnc))) {
-                throw new HTML2PDF_exception(1, strtoupper($action['name']), $this->parsingHtml->getHtmlErrorCode($action['html_pos']));
+                throw new HTML2PDF_\Exception(1, strtoupper($action['name']), $this->parsingHtml->getHtmlErrorCode($action['html_pos']));
             }
 
             // lauch the action
@@ -1316,7 +1316,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             if (count($infos)<2) {
                 // if the test is activ => exception
                 if ($this->_testIsImage) {
-                    throw new HTML2PDF_exception(6, $src);
+                    throw new HTML2PDF_\Exception(6, $src);
                 }
 
                 // else, display a gray rectangle
@@ -1579,7 +1579,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                 // if the image can not be loaded
                 if (count($imageInfos)<2) {
                     if ($this->_testIsImage) {
-                        throw new HTML2PDF_exception(6, $iName);
+                        throw new HTML2PDF_\Exception(6, $iName);
                     }
                 } else {
                     // convert the size of the image from pixel to the unit of the PDF
@@ -3073,7 +3073,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             if (!isset($param['style']['color'])) $param['style']['color'] = '#000000';
 
             if ($this->_testIsDeprecated && (isset($param['bar_h']) || isset($param['bar_w'])))
-                throw new HTML2PDF_exception(9, array('BARCODE', 'bar_h, bar_w'));
+                throw new HTML2PDF_\Exception(9, array('BARCODE', 'bar_h, bar_w'));
 
             $param['type'] = strtoupper($param['type']);
             if (isset($lstBarcode[$param['type']])) $param['type'] = $lstBarcode[$param['type']];
@@ -3128,7 +3128,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
         protected function _tag_open_QRCODE($param)
         {
             if ($this->_testIsDeprecated && (isset($param['size']) || isset($param['noborder'])))
-                throw new HTML2PDF_exception(9, array('QRCODE', 'size, noborder'));
+                throw new HTML2PDF_\Exception(9, array('QRCODE', 'size, noborder'));
 
             if ($this->_debugActif) $this->_DEBUG_add('QRCODE');
 
@@ -3393,7 +3393,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                     $nb++;
                     if ($nb>10000) {
                         $txt = ''; foreach ($words as $k => $word) $txt.= ($k ? ' ' : '').$word[0];
-                        throw new HTML2PDF_exception(2, array($txt, $right-$left, $w));
+                        throw new HTML2PDF_\Exception(2, array($txt, $right-$left, $w));
                     }
 
                     // new margins for the new line
@@ -5521,7 +5521,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
                 // it msut take only one page
                 if ($this->_testTdInOnepage && $this->_subHtml->pdf->getPage()>1) {
-                    throw new HTML2PDF_exception(7);
+                    throw new HTML2PDF_\Exception(7);
                 }
 
                 // size of the content of the TD
@@ -6114,7 +6114,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_LINE($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'LINE');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'LINE');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6141,7 +6141,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_RECT($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'RECT');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'RECT');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6168,7 +6168,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_CIRCLE($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'CIRCLE');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'CIRCLE');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6193,7 +6193,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_ELLIPSE($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'ELLIPSE');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'ELLIPSE');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6220,7 +6220,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_POLYLINE($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'POLYGON');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'POLYGON');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6266,7 +6266,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_POLYGON($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'POLYGON');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'POLYGON');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6313,7 +6313,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_PATH($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'PATH');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'PATH');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();
@@ -6442,7 +6442,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
          */
         protected function _tag_open_G($param)
         {
-            if (!$this->_isInDraw) throw new HTML2PDF_exception(8, 'G');
+            if (!$this->_isInDraw) throw new HTML2PDF_\Exception(8, 'G');
 
             $this->pdf->doTransform(isset($param['transform']) ? $this->_prepareTransform($param['transform']) : null);
             $this->parsingCss->save();

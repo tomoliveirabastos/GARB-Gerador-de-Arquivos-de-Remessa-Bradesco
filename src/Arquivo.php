@@ -1,7 +1,5 @@
 <?php
-include 'HeaderLabel.php';
-include 'Detalhes.php';
-include 'Trailler.php';
+namespace App;
 
 class Arquivo {
 	private $header_label;
@@ -141,7 +139,7 @@ class Arquivo {
 			$detalhe->setNumero_sequencial_registro($numero_sequencial++);
 			$dados .= $detalhe->montar_linha() . self::QUEBRA_LINHA;
 		}
-		//montando rodap�
+
 		$trailler = new Trailler();
 		$trailler->setNumero_sequencial_regsitro($numero_sequencial++);
 		$this->setTrailler($trailler);

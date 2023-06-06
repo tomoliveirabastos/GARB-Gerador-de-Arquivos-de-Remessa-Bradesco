@@ -1,15 +1,7 @@
 <?php
-
+namespace App;
 class Funcoes {
-	
-	/**
-	 * metodo para montar uma string com espa�os em branco
-	 * @param unknown $string
-	 * @param unknown $tamanho
-	 * @param string $posicao
-	 * @return string|boolean
-	 */
-	public function montar_branco($string, $tamanho, $posicao = 'left') {
+	public function montar_branco(string $string, int $tamanho, string $posicao = 'left') {
 		//contanto tamanho da string
 		$qtd_value = (int) strlen($string);
 		
@@ -22,7 +14,6 @@ class Funcoes {
 				$result .= ' ' ;
 			}
 				
-			//verificando posi��o dos zeros
 			if($posicao == 'left') {
 				$result = $result . $string;
 			}elseif($posicao == 'right') {
@@ -31,17 +22,11 @@ class Funcoes {
 				
 			return $result;
 		}else {
-			throw new Exception('Error - tamanho da quantidade de espa�os n�o especificado.');
+			throw new \Exception('Error - tamanho da quantidade de espa�os n�o especificado.');
 		}
 	}
 	
-	/**
-	 * Preenche com zeros a esqueda da string
-	 * @param unknown $string
-	 * @param unknown $tamanho
-	 * @return string
-	 */
-	public function add_zeros($string, $tamanho, $posicao = 'left') {
+	public function add_zeros(string $string, int $tamanho, string $posicao = 'left') {
 		//contanto tamanho da string
 		$qtd_value = (int) strlen($string);
 		
@@ -81,7 +66,7 @@ class Funcoes {
 			return strtoupper($this->removeAccents($return));
 		}else {
 			//die($string);
-			throw new Exception('Erro - Informações de linha invalidas.');
+			throw new \Exception('Erro - Informações de linha invalidas.');
 		}
 	}
 	
@@ -123,13 +108,7 @@ class Funcoes {
 	  return $string;
 	}
 	
-	/**
-	 * valida o tamanho do campo
-	 * @param unknown $string
-	 * @param unknown $tamanho
-	 * @return boolean
-	 */
-	public function valid_tamanho_campo($string, $tamanho, $menor_que = false) {
+	public function valid_tamanho_campo(string $string,int $tamanho, bool $menor_que = false) {
 		$length = (int) strlen($string);
 		
 		if($length == $tamanho) {
@@ -145,11 +124,6 @@ class Funcoes {
 		}
 	}
 	
-	/**
-	 * metodo para remover forma��o de moedas: pontos e virgulas
-	 * @param unknown $valor
-	 * @return mixed|boolean
-	 */
 	public function remove_formatacao_moeda($valor) {
 		if(is_numeric($valor)) {
 			$return = str_replace(".", "", $valor);
@@ -157,15 +131,10 @@ class Funcoes {
 			
 			return $return;
 		}else {
-			throw new Exception('Error - O valor ' . $valor . ' nao eh um numero.');
+			throw new \Exception('Error - O valor ' . $valor . ' nao eh um numero.');
 		}
 	}
 	
-	/**
-	 * metodo para validar o CPF
-	 * @param string $cpf
-	 * @return boolean
-	 */
 	public function validaCPF($cpf = null) {
 	
 		// Verifica se um n�mero foi informado
@@ -201,10 +170,10 @@ class Funcoes {
 			for ($t = 9; $t < 11; $t++) {
 				 
 				for ($d = 0, $c = 0; $c < $t; $c++) {
-					$d += $cpf{$c} * (($t + 1) - $c);
+					$d += $cpf[$c] * (($t + 1) - $c);
 				}
 				$d = ((10 * $d) % 11) % 10;
-				if ($cpf{$c} != $d) {
+				if ($cpf[$c] != $d) {
 					return false;
 				}
 			}
@@ -237,12 +206,6 @@ class Funcoes {
 		return $dv;
 	}
 	
-	/**
-	 * calculo do modulo 11 do digito veirificador
-	 * @param unknown $num
-	 * @param number $base
-	 * @return multitype:number
-	 */
 	public static function modulo11( $num, $base=9)
 	{
 		$fator = 2;
@@ -273,13 +236,6 @@ class Funcoes {
 		return $result;
 	}
 	
-	/**
-	 * metodo para resumir o texto
-	 * ESSA NÃO É UMA FORMA IDEAL
-	 * @param unknown $string
-	 * @param unknown $tamanho
-	 * @return string
-	 */
 	public function resume_texto($string, $tamanho) {
 		return substr($string, 0, $tamanho);
 	}

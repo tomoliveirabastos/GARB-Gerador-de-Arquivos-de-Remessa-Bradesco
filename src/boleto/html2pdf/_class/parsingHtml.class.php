@@ -114,9 +114,9 @@ class HTML2PDF_parsingHtml
                         if ($res['close']) {
                             // HTML validation
                             if (count($parents)<1)
-                                throw new HTML2PDF_exception(3, $res['name'], $this->getHtmlErrorCode($res['html_pos']));
+                                throw new HTML2PDF_\Exception(3, $res['name'], $this->getHtmlErrorCode($res['html_pos']));
                             else if ($parents[count($parents)-1]!=$res['name'])
-                                throw new HTML2PDF_exception(4, $parents, $this->getHtmlErrorCode($res['html_pos']));
+                                throw new HTML2PDF_\Exception(4, $parents, $this->getHtmlErrorCode($res['html_pos']));
                             else
                                 unset($parents[count($parents)-1]);
                         } else {
@@ -215,7 +215,7 @@ class HTML2PDF_parsingHtml
         }
 
         // if we are not on the level 0 => HTML validator ERROR
-        if (count($parents)) throw new HTML2PDF_exception(5, $parents);
+        if (count($parents)) throw new HTML2PDF_\Exception(5, $parents);
 
         // save the actions to do
         $this->code = array_values($actions);

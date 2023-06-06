@@ -1,14 +1,5 @@
 <?php
-/**
- * Lay-out do Arquivo-Remessa - Registro Header Label
- * Lay-out para Cobran�a com Registro e sem Registro com Emiss�o do Boleto pelo 
- * Banco ou pela Empresa
- * Descri��o de Registro - Tamanho 400 Bytes
- * A - Alfanum�rico - Conte�do em Caixa Alta (Letras Mai�sculas)
- * N - Num�rico
- */
-require_once 'Funcoes.php';
-require_once 'IFuncoes.php';
+namespace App;
 
 class HeaderLabel extends Funcoes implements IFuncoes {
 	//001 - 001 - 1 -  N CONSTANTE
@@ -43,23 +34,14 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 	private $numero_sequencial_regsitro = '000001';
 	
 	
-	/**
-	 * @return the $codigo_empresa
-	 */
 	public function getCodigo_empresa() {
 		return $this->codigo_empresa;
 	}
 
-	/**
-	 * @return the $nome_empresa
-	 */
 	public function getNome_empresa() {
 		return $this->nome_empresa;
 	}
 
-	/**
-	 * @return the $data_gravacao
-	 */
 	public function getData_gravacao() {
 		//verifica se a variavel esta vazia, se sim poe a data atual como default
 		if(empty($this->data_gravacao)) {
@@ -83,7 +65,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 		if(is_numeric($codigo_empresa)) {
 			$this->codigo_empresa = $this->add_zeros($codigo_empresa, 20);
 		}else {
-			throw new Exception('Error - N�o � um numero');
+			throw new \Exception('Error - N�o � um numero');
 		}
 	}
 
@@ -96,7 +78,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 		if($length > 0 && $length <= 30) {
 			$this->nome_empresa = $this->montar_branco($nome_empresa, 30, 'right');
 		}else {
-			throw new Exception('Error - Tamanho de texto invalido, para o nome da empresa.');
+			throw new \Exception('Error - Tamanho de texto invalido, para o nome da empresa.');
 		}
 	}
 	
@@ -107,7 +89,7 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 		if(is_numeric($data_gravacao)) {
 			$this->data_gravacao = $data_gravacao;
 		}else {
-			throw new Exception('Error - O campo data de grava��o n�o � um numero.');
+			throw new \Exception('Error - O campo data de grava��o n�o � um numero.');
 		}
 	}
 	
@@ -122,16 +104,13 @@ class HeaderLabel extends Funcoes implements IFuncoes {
 			if($this->valid_tamanho_campo($numero_sequencial_remessa, 7)) {
 				$this->numero_sequencial_remessa = $numero_sequencial_remessa;
 			}else {
-				throw new Exception('Error - Tamanho de texto invalido, para o campo numero sequencial remessa.');
+				throw new \Exception('Error - Tamanho de texto invalido, para o campo numero sequencial remessa.');
 			}
 		}else {
-			throw new Exception('Error - O campo numero sequencial remessa n�o � um numero.');
+			throw new \Exception('Error - O campo numero sequencial remessa n�o � um numero.');
 		}
 	}
 	
-	/* (non-PHPdoc)
-	 * @see IFuncoes::montar_linha()
-	 */
 	public function montar_linha() {
 		
 		//motando linha do cabe�alho da remessa

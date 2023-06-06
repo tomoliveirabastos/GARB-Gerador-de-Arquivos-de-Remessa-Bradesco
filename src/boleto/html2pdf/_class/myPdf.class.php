@@ -898,7 +898,7 @@ class HTML2PDF_myPdf extends TCPDF
 
                 // Unknown Path
                 default:
-                    throw new HTML2PDF_exception(0, 'SVG Path Error : ['.$action[0].'] unkown');
+                    throw new HTML2PDF_\Exception(0, 'SVG Path Error : ['.$action[0].'] unkown');
             }
 
             // save the last point
